@@ -1,3 +1,42 @@
+body {
+  background-color: whitesmoke;
+}
+
+.btn {
+  width: 200px;
+  height: 50px;
+  background-color: aqua;
+  border-radius: 23px;
+  margin: 10px;
+  border: none;
+  box-shadow: rgb(80, 99, 99) 5px 15px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.btn:hover {
+  background-color: rgb(255, 85, 241);
+  box-shadow: rgb(80, 99, 99) 15px 15px 15px;
+}
+
+input {
+  width: 200px;
+  height: 40px;
+  border-radius: 23px;
+  border: none;
+  text-align: center;
+  font-size: 21px;
+  box-shadow: rgb(80, 99, 99) 5px 10px 10px;
+  margin: 7px 0px;
+}
+
+.input-range {
+  box-shadow: rgb(80, 99, 99) 0px 0px 0px;
+}
+
+
 .App {
   text-align: center;
   display: flex;
@@ -15,7 +54,7 @@
 
 .array-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-end;
   height: 600px;
   width: 1000px;
@@ -28,12 +67,18 @@
   flex-direction: column;
   height: 400px;
   width: 300px;
-  border: 1px solid black;
-  padding: 15px;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: gainsboro;
+  box-shadow: black 15px 15px 35px;
+  border-radius: 23px;
+  margin: 10px;
+  font-size: 21px;
 }
 
 .array-bar {
-  width: 6px;
-  background-color: aqua;
+  width: auto;
   transition: all 0.5s;
+  border-radius: 3px;
 }
