@@ -1,11 +1,13 @@
-import Searching from './components/Searching'
+import Searching from './searchingAlgorithms/Searching'
+import Sorting from './sortingAlgorithms/Sorting'
 import './App.css';
 
 
 function App() {
   return (
     <div className="App">
-      <Searching />
+      {/* <Searching /> */}
+      <Sorting />
     </div>
   );
 }

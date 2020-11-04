@@ -21,7 +21,7 @@ body {
   box-shadow: rgb(80, 99, 99) 15px 15px 15px;
 }
 
-input {
+input, .select {
   width: 200px;
   height: 40px;
   border-radius: 23px;
@@ -36,6 +36,16 @@ input {
   box-shadow: rgb(80, 99, 99) 0px 0px 0px;
 }
 
+/* .sorting-input-range {
+  box-shadow: rgb(80, 99, 99) 0px 0px 0px;
+  transform: rotate(-90deg)
+} */
+
+.select {
+  padding-left: 40px;
+  height: 42px;
+  font-size: 19px;
+}
 
 .App {
   text-align: center;
@@ -45,28 +55,32 @@ input {
   align-items: center;
 }
 
-.searching-container {
+.searching-container, .sorting-container {
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   align-items: center;
-  /* justify-content: center; */
+  height: 100%;
+  margin-top: 50px;
+  /* justify-content: flex-start; */
 }
 
 .array-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  height: 600px;
+  height: 550px;
   width: 1000px;
-  border: 1px solid red;
+  box-shadow: black 1px 0px 15px;
   margin: 0px 5px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .utility-container {
   display: flex;
   flex-direction: column;
   height: 400px;
-  width: 300px;
+  width: 250px;
   padding: 5px;
   align-items: center;
   justify-content: center;
@@ -81,4 +95,34 @@ input {
   width: auto;
   transition: all 0.5s;
   border-radius: 3px;
+  padding: 1px;
+}
+
+.sorting-array-bar {
+  width: 50px;
+  /* transition: all 0.1s; */
+  border-radius: 3px;
+  margin: 0px 1px;
+}
+
+.result-box {
+  position: absolute;
+  width: 250px;
+  height: 50px;
+  left: 39vw;
+  top: 9vh;
+  transform: translateX(-125px);
+  border-radius: 13px;
+  line-height: 50px;
+  font-weight: bold;
+  color: white;
+  /* background-color: greenyellow; */
+}
+.green{
+  background-color: #107834;
+  box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 10px;
+}
+.red{
+  background-color: #751111;
+  box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 10px;
 }

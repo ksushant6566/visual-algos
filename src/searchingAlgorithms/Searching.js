@@ -6,9 +6,10 @@ const Searching = () => {
     const [size, setSize] = useState(30)
     const [searchValue, setSearchValue] = useState(250)
     const [searchAlgo, setSearchAlgo] = useState('linearSearch')
+    const [resultmsg, setResultmsg] = useState('')
 
-    const primaryColor = "red"
-    const secondaryColor = "gold"
+    const primaryColor = "#074478"
+    const secondaryColor = "cyan"
 
     useEffect( () => {
         searchAlgo === "linearSearch" ? getNewArray(size) : getNewSortedArray(size)
@@ -30,6 +31,8 @@ const Searching = () => {
         }
         // console.log(arr)
         setMainArray(arr)
+
+        displayResult("no-result")
     }
 
 // generate new sorted Array
@@ -51,17 +54,22 @@ const Searching = () => {
         }
         // console.log(arr)
         setMainArray(arr)
+        
+        displayResult("no-result")
     }
 
 // LINEAR SEARCH
 
     const linearSearch = (value) => {
+        let found = false;
         for(let i = 0; i < size; i++) {
             if(value == mainArray[i].val) {
                 setTimeout(() => {
-                    document.getElementsByClassName("array-bar")[i].style.backgroundColor = "green"
+                    document.getElementsByClassName("array-bar")[i].style.backgroundColor = "#107834"
+                    displayResult(i)
                 }, i * 100)
-                // console.log("found at idx : " + i)
+                
+                found = true;
                 return
             }else {
                 setTimeout(() => {
@@ -72,7 +80,11 @@ const Searching = () => {
                 }, (i + 5) * 100)
             }
         }
-        
+        if(found === false) {
+            setTimeout(() => {
+                displayResult(-1)
+            }, (size) * 100);
+        }
     }
 
 // BINARY SEARCH
@@ -123,21 +135,25 @@ const Searching = () => {
         for(let k = 0; k < animations.length; k++) {
             if(animations[k].i == -1){
                 setTimeout(() => {
-                    // console.log("not found")
+                    
+                    displayResult(-1)
+
                     bars[animations[k-1].mid].style.backgroundColor =  'grey';
                 }, k * 1000)
                 break;
             }
 
             if( mainArray[animations[k].mid].val == searchValue) {
-                // console.log("found")
+                
                 setTimeout(() => {
-                    bars[animations[k].mid].style.backgroundColor =  'green';
+                    bars[animations[k].mid].style.backgroundColor =  '#107834';
+
+                    displayResult(animations[k].mid)
+
                 }, (k+1) * 1000)
             }
 
             setTimeout(() => {
-                // console.log(animations[k].mid)
 
                 for(let m = 0; m < size; m++) {
                     
@@ -165,9 +181,34 @@ const Searching = () => {
         searchAlgo === 'binarySearch' ? getNewSortedArray(size) : getNewArray(size)
     }, [searchAlgo] )
 
+// SHOW RESULT
+    const displayResult = (idx) => {
+        console.log("called")
+
+        if(idx === "no-result") {
+            setResultmsg("")
+            document.getElementById("result-box").classList.remove("red", "green")
+        }
+
+        else if(idx === -1) {
+            // setResultmsg()
+            setResultmsg(`not found !!!`)
+            document.getElementById("result-box").classList.remove("red", "green")
+            document.getElementById("result-box").classList.add("red")
+        }else {
+            setResultmsg(`found at idx ${idx}`)
+            document.getElementById("result-box").classList.remove("red", "green")
+            document.getElementById("result-box").classList.add("green")
+        }
+    }
+
     return (
         <div className="searching-container">
             <div className="array-container">
+                <div id="result-box" className="result-box" >
+                    {resultmsg}
+                </div>
+
                 {mainArray.map(item => {
                     return (
                         <div className="array-bar" key ={item.idx} style={{height : item.val, backgroundColor : primaryColor}} >{item.val} </div>
@@ -191,11 +232,11 @@ const Searching = () => {
                     value = {size}
                     onChange = {(e) => setSize(e.target.value)}
                     min = "15"
-                    max = "37"
+                    max = "34"
                 >
                 </input>
 
-                <select value={searchAlgo} onChange = {(e) => {setSearchAlgo(e.target.value)}}>
+                <select className="select" value={searchAlgo} onChange = {(e) => {setSearchAlgo(e.target.value)}}>
                     
                     <option value="linearSearch">linearSearch</option>
 
