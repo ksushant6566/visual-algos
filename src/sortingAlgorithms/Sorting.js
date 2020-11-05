@@ -7,7 +7,7 @@ const Sorting = () => {
     const [mainArray, setMainArray] = useState([])
     const [size, setSize] = useState(30)
     const [speed, setSpeed] = useState(30)
-    const [searchAlgo, setSearchAlgo] = useState('bubbleSort')
+    const [sortAlgo, setSortAlgo] = useState('bubbleSort')
 
     const primaryColor = "#074478"
     const secondaryColor = "cyan"
@@ -15,11 +15,11 @@ const Sorting = () => {
 
     useEffect( () => {
         getNewArray(size)
-    },[size,])
+    },[size, sortAlgo])
 
     const sort =() => {
-        if(searchAlgo === 'bubbleSort') bubbleSort()
-        else if(searchAlgo === 'mergeSort') mergeSort()
+        if(sortAlgo === 'bubbleSort') bubbleSort()
+        else if(sortAlgo === 'mergeSort') mergeSort()
     }
 
     const getNewArray = (size) => {
@@ -40,7 +40,7 @@ const Sorting = () => {
     }
 
     const bubbleSort = () => {
-        const animations = getBubbleSortAnimation(mainArray)
+        const {animations, arr} = getBubbleSortAnimation(mainArray)
         const bars = document.getElementsByClassName("sorting-array-bar")
         let m = 0;
         for(let k = 0; k < animations.length; k++) {
@@ -75,10 +75,15 @@ const Sorting = () => {
         }
 
         setTimeout(() => {
+            let sortedArray = []
             for(let i = 0; i < size; i++) {
                 bars[i].style.backgroundColor = 'purple'
+                sortedArray.push({
+                    idx : i,
+                    val : arr[i]
+                })
             }
-            
+            setMainArray(sortedArray)
 
         }, (m+1) * speed)
 
@@ -154,7 +159,7 @@ const Sorting = () => {
                 >
                 </input>
 
-                <select className="select" value={searchAlgo} onChange = {(e) => {setSearchAlgo(e.target.value)}}>
+                <select className="select" value={sortAlgo} onChange = {(e) => {setSortAlgo(e.target.value)}}>
                     
                     <option value="bubbleSort">bubbleSort</option>
 

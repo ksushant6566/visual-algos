@@ -25,5 +25,6 @@ export const getBubbleSortAnimation = (tempArr) => {
         if(swapped === false) break;
     }
 
-    return animations
+    
+    return { animations , arr }
 }
