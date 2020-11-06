@@ -100,7 +100,7 @@ input, .select {
 
 .sorting-array-bar {
   width: 50px;
-  transition: height 0.5s;
+  transition: height 0.2s;
   border-radius: 3px;
   margin: 0px 1px;
 }

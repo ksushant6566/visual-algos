@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { getBubbleSortAnimation } from './bubbleSort'
-import { getMergeSortAnimation } from './mergeSort'
+import { getMergeSorted } from './mergeSort'
+import { getInsertionSorted } from './insertionSort'
+import { getQuickSorted } from './quickSort'
 
 const Sorting = () => {
 
@@ -20,6 +22,8 @@ const Sorting = () => {
     const sort =() => {
         if(sortAlgo === 'bubbleSort') bubbleSort()
         else if(sortAlgo === 'mergeSort') mergeSort()
+        else if(sortAlgo === 'insertionSort') insertionSort()
+        else if(sortAlgo === 'quickSort') quickSort()
     }
 
     const getNewArray = (size) => {
@@ -38,6 +42,8 @@ const Sorting = () => {
         setMainArray(arr)
 
     }
+
+// BUBBLE SORT
 
     const bubbleSort = () => {
         const {animations, arr} = getBubbleSortAnimation(mainArray)
@@ -89,8 +95,10 @@ const Sorting = () => {
 
     }
 
+// MERGE SORT
+
     const mergeSort = () => {
-        let { sortedArray, count } = getMergeSortAnimation(mainArray, speed)
+        let { sortedArray, count } = getMergeSorted(mainArray, speed)
 
 
         const newArr = []
@@ -111,6 +119,42 @@ const Sorting = () => {
 
     }
 
+// INSERTION SORT
+
+    const insertionSort = () => {
+        const { arr, counter } = getInsertionSorted(mainArray, speed)
+        let newArray = [];
+
+        for(let i =0; i < size; i++) newArray.push({ idx: i,val: arr[i] })
+
+            setTimeout(() => {
+                setMainArray(newArray)
+
+                for(let i = 0; i < size; i++) {
+                    document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
+                }
+            }, counter * speed);
+    }
+
+// QUICK SORT
+
+    const quickSort = () => {
+        const { sortedArray, counter } = getQuickSorted(mainArray, speed)
+
+        let newArray = []
+        for(let i =0; i < size; i++) newArray.push({ idx: i,val: sortedArray[i] })
+
+        setTimeout(() => {
+            setMainArray(newArray)
+
+            for(let i = 0; i < size; i++) {
+                document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
+            }
+        }, counter * speed);
+
+    }
+
+// GET RANDOM NUMBER FROM A GIVEN INTERVAL
     const getNumFromInterval = (i, j) => {
         return i + Math.floor(Math.random() * (j-i))
     }
@@ -144,7 +188,7 @@ const Sorting = () => {
                     value = {size}
                     onChange = {(e) => setSize(e.target.value)}
                     min = "5"
-                    max = "100"
+                    max = "250"
                 >
                 </input>
 

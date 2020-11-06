@@ -1,5 +1,5 @@
 var count = 0;
-export const getMergeSortAnimation = (tempArr, speed) => {
+export const getMergeSorted = (tempArr, speed) => {
 
     let arr = tempArr.map(item => item.val)
     count = 0;
