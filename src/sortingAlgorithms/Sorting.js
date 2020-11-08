@@ -3,6 +3,7 @@ import { getBubbleSortAnimation } from './bubbleSort'
 import { getMergeSorted } from './mergeSort'
 import { getInsertionSorted } from './insertionSort'
 import { getQuickSorted } from './quickSort'
+import { getRadixSorted } from './radixSort'
 
 const Sorting = () => {
 
@@ -24,6 +25,7 @@ const Sorting = () => {
         else if(sortAlgo === 'mergeSort') mergeSort()
         else if(sortAlgo === 'insertionSort') insertionSort()
         else if(sortAlgo === 'quickSort') quickSort()
+        else if (sortAlgo === 'radixSort') radixSort()
     }
 
     const getNewArray = (size) => {
@@ -154,6 +156,24 @@ const Sorting = () => {
 
     }
 
+// RADIX SORT
+
+    const radixSort = () => {
+        const { sortedArray, counter } = getRadixSorted(mainArray, speed)
+
+        let newArray = []
+        for(let i =0; i < size; i++) newArray.push({ idx: i,val: sortedArray[i] })
+
+        setTimeout(() => {
+            setMainArray(newArray)
+
+            for(let i = 0; i < size; i++) {
+                document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
+            }
+        }, counter * speed);
+    }
+
+
 // GET RANDOM NUMBER FROM A GIVEN INTERVAL
     const getNumFromInterval = (i, j) => {
         return i + Math.floor(Math.random() * (j-i))
@@ -212,8 +232,6 @@ const Sorting = () => {
                     <option value="mergeSort">mergeSort</option>
 
                     <option value="radixSort">radixSort</option>
-
-                    <option value="shellSort">shellSort</option>
 
                     <option value="insertionSort">insertionSort</option>
 
