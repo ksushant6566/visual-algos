@@ -8,7 +8,7 @@ import { getRadixSorted } from './radixSort'
 const Sorting = () => {
 
     const [mainArray, setMainArray] = useState([])
-    const [size, setSize] = useState(30)
+    const [size, setSize] = useState(100)
     const [speed, setSpeed] = useState(30)
     const [sortAlgo, setSortAlgo] = useState('bubbleSort')
 
@@ -50,6 +50,14 @@ const Sorting = () => {
     const bubbleSort = () => {
         const {animations, arr} = getBubbleSortAnimation(mainArray)
         const bars = document.getElementsByClassName("sorting-array-bar")
+
+        let btn = document.getElementsByClassName("btn");
+        console.log(btn)
+        for(let i = 0; i < btn.length; i++) {
+            btn[i].disabled = !btn[i].disabled
+            console.log(btn[i].disabled)
+        }
+
         let m = 0;
         for(let k = 0; k < animations.length; k++) {
             let i = animations[k].i
@@ -92,6 +100,8 @@ const Sorting = () => {
                 })
             }
             setMainArray(sortedArray)
+
+            for(let i = 0; i < btn.length; i++) btn[i].disabled = !btn[i].disabled
 
         }, (m+1) * speed)
 
@@ -208,7 +218,7 @@ const Sorting = () => {
                     value = {size}
                     onChange = {(e) => setSize(e.target.value)}
                     min = "5"
-                    max = "250"
+                    max = "300"
                 >
                 </input>
 

@@ -211,12 +211,12 @@ const Searching = () => {
 
                 {mainArray.map(item => {
                     return (
-                        <div className="array-bar" key ={item.idx} style={{height : item.val, backgroundColor : primaryColor}} >{item.val} </div>
+                        <div className="array-bar" key ={item.idx} style={{height : item.val, backgroundColor : primaryColor}} > <p>{item.val}</p> </div>
                     )
                 })}
             </div>
             <div className="utility-container">
-            <label>Element to be Searched</label>
+            <label>Search Element</label>
                 <input
                     placeholder="try "
                     type = "number"
@@ -224,6 +224,8 @@ const Searching = () => {
                     onChange = {(e) => setSearchValue(e.target.value)}
                 >
                 </input>
+
+                <div style = {{height:"10px"}} ></div>
                 
                 <label>Length of Array</label>
                 <input
