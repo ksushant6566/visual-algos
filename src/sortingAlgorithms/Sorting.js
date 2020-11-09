@@ -11,21 +11,46 @@ const Sorting = () => {
     const [size, setSize] = useState(100)
     const [speed, setSpeed] = useState(30)
     const [sortAlgo, setSortAlgo] = useState('bubbleSort')
+    const [able, setAble] = useState(true)
 
     const primaryColor = "#074478"
     const secondaryColor = "cyan"
     const thirdColor = "red"
 
     useEffect( () => {
-        getNewArray(size)
+        if(able) {
+            getNewArray(size)
+        }
     },[size, sortAlgo])
 
+// ABLE / DISABLE BUTTONS ETC.
+
+    useEffect(() => {
+        const items = document.getElementsByClassName('able');
+
+        if(!able) {
+            for(let i=0; i < items.length; i++) {
+                items[i].style.pointerEvents = 'none';
+                items[i].disabled = true;
+
+                // items[i].style.backgroundColor = 'grey';
+            }
+        }else {
+            for(let i=0; i < items.length; i++) {
+                items[i].style.pointerEvents = 'auto';
+                items[i].disabled = false;
+            }
+        }
+    }, [able])
+
     const sort =() => {
-        if(sortAlgo === 'bubbleSort') bubbleSort()
-        else if(sortAlgo === 'mergeSort') mergeSort()
-        else if(sortAlgo === 'insertionSort') insertionSort()
-        else if(sortAlgo === 'quickSort') quickSort()
-        else if (sortAlgo === 'radixSort') radixSort()
+        if(able) {
+            if(sortAlgo === 'bubbleSort') bubbleSort()
+            else if(sortAlgo === 'mergeSort') mergeSort()
+            else if(sortAlgo === 'insertionSort') insertionSort()
+            else if(sortAlgo === 'quickSort') quickSort()
+            else if (sortAlgo === 'radixSort') radixSort()
+        }
     }
 
     const getNewArray = (size) => {
@@ -40,7 +65,8 @@ const Sorting = () => {
                 document.getElementsByClassName("sorting-array-bar")[i].style.backgroundColor = primaryColor
             }
         }
-        // console.log(arr)
+        
+        if(able)
         setMainArray(arr)
 
     }
@@ -51,12 +77,7 @@ const Sorting = () => {
         const {animations, arr} = getBubbleSortAnimation(mainArray)
         const bars = document.getElementsByClassName("sorting-array-bar")
 
-        let btn = document.getElementsByClassName("btn");
-        console.log(btn)
-        for(let i = 0; i < btn.length; i++) {
-            btn[i].disabled = !btn[i].disabled
-            console.log(btn[i].disabled)
-        }
+        setAble(false)
 
         let m = 0;
         for(let k = 0; k < animations.length; k++) {
@@ -100,8 +121,7 @@ const Sorting = () => {
                 })
             }
             setMainArray(sortedArray)
-
-            for(let i = 0; i < btn.length; i++) btn[i].disabled = !btn[i].disabled
+            setAble(true)
 
         }, (m+1) * speed)
 
@@ -110,8 +130,8 @@ const Sorting = () => {
 // MERGE SORT
 
     const mergeSort = () => {
+        setAble(false)
         let { sortedArray, count } = getMergeSorted(mainArray, speed)
-
 
         const newArr = []
         for(let i = 0; i < size; i++) {
@@ -127,6 +147,7 @@ const Sorting = () => {
             for(let i = 0; i < size; i++) {
                 document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
             }
+            setAble(true)
         }, (count+10) * speed);
 
     }
@@ -134,6 +155,7 @@ const Sorting = () => {
 // INSERTION SORT
 
     const insertionSort = () => {
+        setAble(false)
         const { arr, counter } = getInsertionSorted(mainArray, speed)
         let newArray = [];
 
@@ -145,12 +167,14 @@ const Sorting = () => {
                 for(let i = 0; i < size; i++) {
                     document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
                 }
+                setAble(true)
             }, counter * speed);
     }
 
 // QUICK SORT
 
     const quickSort = () => {
+        setAble(false)
         const { sortedArray, counter } = getQuickSorted(mainArray, speed)
 
         let newArray = []
@@ -162,6 +186,7 @@ const Sorting = () => {
             for(let i = 0; i < size; i++) {
                 document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
             }
+            setAble(true)
         }, counter * speed);
 
     }
@@ -169,6 +194,7 @@ const Sorting = () => {
 // RADIX SORT
 
     const radixSort = () => {
+        setAble(false)
         const { sortedArray, counter } = getRadixSorted(mainArray, speed)
 
         let newArray = []
@@ -180,6 +206,7 @@ const Sorting = () => {
             for(let i = 0; i < size; i++) {
                 document.getElementsByClassName('sorting-array-bar')[i].style.backgroundColor = 'purple'
             }
+            setAble(true)
         }, counter * speed);
     }
 
@@ -213,7 +240,7 @@ const Sorting = () => {
                 
                 <label>Length of Array</label>
                 <input
-                    className="input-range"
+                    className="input-range able"
                     type = "range"
                     value = {size}
                     onChange = {(e) => setSize(e.target.value)}
@@ -224,7 +251,7 @@ const Sorting = () => {
 
                 <label>Speed</label>
                 <input
-                    className="input-range"
+                    className="input-range able"
                     type = "range"
                     value = {500 - speed}
                     onChange = {(e) => setSpeed(500 - e.target.value)}
@@ -233,7 +260,7 @@ const Sorting = () => {
                 >
                 </input>
 
-                <select className="select" value={sortAlgo} onChange = {(e) => {setSortAlgo(e.target.value)}}>
+                <select className="select able" value={sortAlgo} onChange = {(e) => {setSortAlgo(e.target.value)}}>
                     
                     <option value="bubbleSort">bubbleSort</option>
 
@@ -247,8 +274,8 @@ const Sorting = () => {
 
                 </select>
 
-                <div className="btn" onClick = {() => getNewArray(size)}> reset array </div>
-                <div className="btn" onClick = {() => sort()}> sort </div>
+                <div className="btn able" onClick = {() => getNewArray(size)}> reset array </div>
+                <div className="btn able" onClick = {() => sort()}> sort </div>
             </div>
 
         </div>
