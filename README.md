@@ -1,15 +1,16 @@
 # Welcome to visual-algos !
 
-it is a visualization tool for searhing and sorting algorithms.
+#### it is a visualization tool for searhing and sorting algorithms.
 
 following algorithms are available at the moment 
-# Searching : Linear search, Binary search
-# Sorting Algorithms : Bubble sort, Insertion sort, Radix sort, Merge sort, Quick sort.
+#### Searching : Linear search, Binary search
+#### Sorting Algorithms : Bubble sort, Insertion sort, Radix sort, Merge sort, Quick sort.
 
- # check out live version here https://ksushant6566.github.io/visual-algos/
+ ### check out live version here https://ksushant6566.github.io/visual-algos/
+ 
+ ##### happy visualizing !
 
-
-
+![image](https://github.com/ksushant6566/visual-algos/blob/main/Screenshot%20(3).png)
 
 # Getting Started with Create React App
 
